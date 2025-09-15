@@ -3,42 +3,6 @@
 This project consists of a **FastAPI backend** and a **React frontend**.  
 The backend provides authentication, admin routes, and database integration, while the frontend provides a UI to interact with the backend.
 
----
-
-## 📂 Project Structure
-
-
-
-
-JAZZ-AWS-DYNAMO/
-│── backend/
-│ ├── app/
-│ │ ├── routers/
-│ │ │ ├── admin.py
-│ │ │ └── auth.py
-│ │ ├── config.py
-│ │ ├── database.py
-│ │ ├── main.py
-│ │ ├── models.py
-│ │ ├── schemas.py
-│ │ ├── security.py
-│ │ └── global-bundle.pem
-│ ├── requirements.txt
-│ └── test.py
-│
-│── frontend/
-│ ├── public/
-│ ├── src/
-│ │ ├── Admin.js
-│ │ ├── Admin.css
-│ │ └── ...
-│ └── package.json
-│
-└── Dockerfile
-
-
-
-
 ## ⚙️ Backend Setup (FastAPI)
 
 1. Navigate to backend
@@ -58,6 +22,22 @@ JAZZ-AWS-DYNAMO/
 
 Backend will be available at:
 http://localhost:8000
+
+
+
+Frontend Setup (React)
+
+Navigate to frontend
+1.cd frontend
+  cd frontend   # if nested
+2.npm install
+3.npm start
+
+http://localhost:3000
+
+
+
+
 
 
 
