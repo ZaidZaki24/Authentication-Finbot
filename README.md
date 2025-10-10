@@ -18,13 +18,12 @@ The backend provides authentication-ready endpoints, **admin routes to create a 
 
 ## 🗂️ Project Structure
 
-.
 ├── backend/
-│ ├── main.py             # Single-file FastAPI backend (DynamoDB logic)
+│ ├── main.py # Single-file FastAPI backend (DynamoDB)
 │ ├── requirements.txt
 │ └── .env.example
 └── frontend/
-└── frontend/         # Note: Frontend folder might be nested
+└── frontend/
 ├── public/
 └── src/
 ├── Admin.js
@@ -166,41 +165,3 @@ Base URL: `http://localhost:8000`
 | **Describe Table** | `/api/table/{name}` | `GET` | Get table details. |
 | **Delete Table** | `/api/table/{name}` | `DELETE` | Delete the specified table. |
 
-**Example: Create Table Body**
-```json
-{
-  "tableName": "finbot-dynamo",
-  "partitionKey": { "name": "id", "type": "S" },
-  "sortKey": { "name": "createdAt", "type": "S" }    // optional
-}
-Item CRUD Operations
-Action	Endpoint	Method	Details
-Create/Replace Item	/api/{table}	POST	Body: any JSON (must include Partition Key, and Sort Key if defined).
-List / Query Items	/api/{table}?pkName=...&pkValue=...&skName=...&skOp=...&skValue=...&limit=...	GET	Query uses PK/SK params. If PK is omitted, a full table Scan (dev only) is performed.
-Get One Item	/api/{table}/{pkVal}?pkName=id&skName=...&skVal=...	GET	Get a specific item by its full primary key.
-Update Item	/api/{table}/{pkVal}?pkName=id&skName=...&skVal=...	PUT	Body: JSON with fields to update.
-Delete Item	/api/{table}/{pkVal}?pkName=id&skName=...&skVal=...	DELETE	Delete a specific item.
-
-Export to Sheets
-🧪 Example cURL Commands
-Bash
-
-# Create table
-curl -X POST http://localhost:8000/api/table \
-  -H "Content-Type: application/json" \
-  -d '{"tableName":"finbot-dynamo","partitionKey":{"name":"id","type":"S"}}'
-
-# Put item
-curl -X POST http://localhost:8000/api/finbot-dynamo \
-  -H "Content-Type: application/json" \
-  -d '{"id":"u1","name":"Ali","age":21}'
-🚀 Deployment Notes
-Backend (EC2 / Elastic Beanstalk / Render / Fly.io):
-Set the same .env values (especially AWS keys and region) as environment variables on your host.
-
-Expose the application port (e.g., 8000).
-
-Consider using a production-ready WSGI server (like Gunicorn) and a reverse proxy (Nginx) for production.
-
-Frontend (Vercel / Netlify / S3+CloudFront):
-Point your API base URL (e.g., REACT_APP_API_BASE_URL or a variable in src/api.js) to the deployed backend URL.
